@@ -1,5 +1,9 @@
 package com.biblioteca.gestionBiblioteca.infrastructure.adapters;
 
+import com.biblioteca.gestionBiblioteca.domain.model.book.Book;
+import com.biblioteca.gestionBiblioteca.domain.model.book.Code;
+import com.biblioteca.gestionBiblioteca.domain.model.book.Name;
+import com.biblioteca.gestionBiblioteca.domain.model.book.State;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IBookRepositoryAdapter;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IUserRepositoryAdapter;
 import org.junit.jupiter.api.AfterEach;
@@ -33,22 +37,24 @@ class BookRepositoryAdapterTest {
     @DisplayName("")
     void saveBook() {
         //Arrange
-
+        Book book = new Book(new Code(2L),new Name("La Odisea"),new State(false));
         //Act
-
+        Book book1 = bookRepositoryAdapter.saveBook(book);
         //Assert
-
+        assertEquals("La Odisea",book1.getName().getValue());
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Prueba updateBook")
     void updateBook() {
         //Arrange
-
+        Book book = new Book(new Code(3L),new Name("La Voragine"),new State(true));
+        book = bookRepositoryAdapter.saveBook(book);
+        Book newBook = new Book(new Code(3L),new Name("La Odisea"),new State(false));
         //Act
-
+        Book res = bookRepositoryAdapter.updateBook(newBook);
         //Assert
-
+        assertEquals("La Odisea",res.getName().getValue());
     }
 
     @Test
@@ -77,10 +83,11 @@ class BookRepositoryAdapterTest {
     @DisplayName("")
     void deleteBook() {
         //Arrange
-
+        Book book = new Book(new Code(2L),new Name("La Odisea"),new State(false));
+        book = bookRepositoryAdapter.saveBook(book);
         //Act
-
+        boolean res = bookRepositoryAdapter.deleteBook(2L);
         //Assert
-
+        assertTrue(res);
     }
 }

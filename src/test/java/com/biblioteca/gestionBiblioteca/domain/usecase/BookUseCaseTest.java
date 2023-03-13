@@ -66,7 +66,7 @@ class BookUseCaseTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Prueba findBookById")
     void findBookById() throws Exception {
         //Arrange
         BookDTO bookDTO = new BookDTO(3L,"La Odisea", false);
@@ -79,7 +79,7 @@ class BookUseCaseTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Prueba findAllBooks")
     void findAllBooks() throws Exception {
         //Arrange
         List<Book> list = new ArrayList<>();
