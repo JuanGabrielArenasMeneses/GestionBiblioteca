@@ -3,6 +3,8 @@ package com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -25,10 +27,18 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LoanDBO {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long bookCode;
     private Long userCode;
     private LocalDate loanDate;
+
+    public LoanDBO(Long bookCode, Long userCode, LocalDate loanDate) {
+        this.bookCode = bookCode;
+        this.userCode = userCode;
+        this.loanDate = loanDate;
+    }
+
     public static Loan toDomain(LoanDBO loanDBO){
         return new Loan(
                 new BookCode(loanDBO.getBookCode()),
@@ -41,6 +51,5 @@ public class LoanDBO {
                            loan.getUserCode().getValue(),
                            loan.getLoanDate().getValue()
                            );
-
     }
 }
