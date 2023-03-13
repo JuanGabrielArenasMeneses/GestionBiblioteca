@@ -1,14 +1,22 @@
 package com.biblioteca.gestionBiblioteca.domain.usecase;
 
+import com.biblioteca.gestionBiblioteca.domain.model.gateway.IBookRepository;
+import com.biblioteca.gestionBiblioteca.domain.model.gateway.IUserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 class UserUseCaseTest {
-
+    @InjectMocks
+    private BookUseCase bookUseCase;
+    @Mock
+    private IUserRepository iUserRepository;
     @BeforeEach
     void setUp() {
     }
