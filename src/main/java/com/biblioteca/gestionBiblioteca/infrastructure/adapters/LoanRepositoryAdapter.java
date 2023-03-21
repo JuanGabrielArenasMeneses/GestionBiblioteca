@@ -11,6 +11,7 @@ import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.ILoanReposit
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.LoanDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @AllArgsConstructor
@@ -18,12 +19,14 @@ public class LoanRepositoryAdapter implements ILoanRepository {
     private final ILoanRepositoryAdapter iLoanRepositoryAdapter;
 
     @Override
+    @Transactional
     public Loan saveLoan(Loan loan) {
         LoanDBO loanSaved = iLoanRepositoryAdapter.save(LoanDBO.fromDomain(loan));
         return LoanDBO.toDomain(loanSaved);
     }
 
     @Override
+    @Transactional
     public Loan updateLoan(Loan loan) {
         LoanDBO dbo = LoanDBO.fromDomain(loan);
         Optional<LoanDBO> elementFound = iLoanRepositoryAdapter.findById(dbo.getId());
@@ -35,6 +38,7 @@ public class LoanRepositoryAdapter implements ILoanRepository {
         }
     }
     @Override
+    @Transactional(readOnly = true)
     public Loan findLoanById(Long code) {
         Optional<LoanDBO> dbo = iLoanRepositoryAdapter.findById(code);
         if(dbo.isEmpty()) {
@@ -45,11 +49,13 @@ public class LoanRepositoryAdapter implements ILoanRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Loan> findAllLoans() {
         return iLoanRepositoryAdapter.findAll().stream().map(LoanDBO::toDomain).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public Boolean deleteLoan(Long code) {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<LoanDBO> dbo = iLoanRepositoryAdapter.findById(code);

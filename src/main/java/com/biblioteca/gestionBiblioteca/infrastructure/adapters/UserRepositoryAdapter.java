@@ -11,6 +11,7 @@ import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IUserReposit
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.UserDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @AllArgsConstructor
@@ -18,12 +19,14 @@ public class UserRepositoryAdapter implements IUserRepository {
     private final IUserRepositoryAdapter iUserRepositoryAdapter;
 
     @Override
+    @Transactional
     public User saveUser(User user) {
         UserDBO userSaved = iUserRepositoryAdapter.save(UserDBO.fromDomain(user));
         return UserDBO.toDomain(userSaved);
     }
 
     @Override
+    @Transactional
     public User updateUser(User user) {
         UserDBO dbo = UserDBO.fromDomain(user);
         Optional<UserDBO> elementFound = iUserRepositoryAdapter.findById(dbo.getCode());
@@ -36,6 +39,7 @@ public class UserRepositoryAdapter implements IUserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserById(Long code) {
         Optional<UserDBO> dbo = iUserRepositoryAdapter.findById(code);
         if(dbo.isEmpty()) {
@@ -46,11 +50,12 @@ public class UserRepositoryAdapter implements IUserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAllUsers() {
         return iUserRepositoryAdapter.findAll().stream().map(UserDBO::toDomain).collect(Collectors.toList());
     }
 
-    @Override
+    @Override@Transactional
     public Boolean deleteUser(Long code) {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<UserDBO> dbo = iUserRepositoryAdapter.findById(code);

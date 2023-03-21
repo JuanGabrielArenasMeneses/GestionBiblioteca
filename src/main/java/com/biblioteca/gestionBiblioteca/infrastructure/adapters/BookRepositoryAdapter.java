@@ -11,6 +11,7 @@ import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IBookReposit
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.BookDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @AllArgsConstructor
@@ -18,11 +19,13 @@ public class BookRepositoryAdapter implements IBookRepository {
     private final IBookRepositoryAdapter iBookRepositoryAdapter;
 
     @Override
+    @Transactional
     public Book saveBook(Book book) {
         BookDBO bookSaved = iBookRepositoryAdapter.save(BookDBO.fromDomain(book));
         return BookDBO.toDomain(bookSaved);
     }
     @Override
+    @Transactional
     public Book updateBook(Book book) {
         BookDBO dbo = BookDBO.fromDomain(book);
         Optional<BookDBO> elementFound = iBookRepositoryAdapter.findById(dbo.getCode());
@@ -34,6 +37,7 @@ public class BookRepositoryAdapter implements IBookRepository {
         }
     }
     @Override
+    @Transactional(readOnly = true)
     public Book findBookById(Long code) {
         Optional<BookDBO> dbo = iBookRepositoryAdapter.findById(code);
         if(dbo.isEmpty()) {
@@ -44,11 +48,13 @@ public class BookRepositoryAdapter implements IBookRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Book> findAllBooks() {
         return iBookRepositoryAdapter.findAll().stream().map(BookDBO::toDomain).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public Boolean deleteBook(Long code) {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<BookDBO> dbo = iBookRepositoryAdapter.findById(code);
