@@ -5,9 +5,21 @@ import com.biblioteca.gestionBiblioteca.domain.model.user.LoanedBooks;
 import com.biblioteca.gestionBiblioteca.domain.model.user.Name;
 import com.biblioteca.gestionBiblioteca.domain.model.user.PenaltyFee;
 import com.biblioteca.gestionBiblioteca.domain.model.user.User;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 public class UserDTO {
+    @NotNull(message = "Este campo no debe estar vacío")
+    @NotEmpty(message = "Este campo no debe estar vacío")
+    @Length(min = 7, max = 15, message = "La cédula debe tener mínimo 7 dígitos y máximo 15")
+    @Pattern(regexp = "\\d+", message = "Ingrese solo números")
     private Long code;
+    @NotNull(message = "Este campo no debe estar vacío")
+    @NotEmpty(message = "Escriba su nombre por favor")
+    @Length(min = 3, max = 50, message = "El nombre debe incluir mínimo 3 caracteres y máximo 50")
+    @Pattern(regexp = "[\\p{L}\\s]+", message = "Ingrese nombre con caracteres válidos")
     private Long name;
     private String loanedBooks;
     private String penaltyFee;

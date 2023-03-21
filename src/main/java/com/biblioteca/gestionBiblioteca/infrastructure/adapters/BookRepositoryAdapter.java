@@ -10,10 +10,10 @@ import com.biblioteca.gestionBiblioteca.domain.model.gateway.IBookRepository;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IBookRepositoryAdapter;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.BookDBO;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+@Service
 @AllArgsConstructor
 public class BookRepositoryAdapter implements IBookRepository {
     private final IBookRepositoryAdapter iBookRepositoryAdapter;

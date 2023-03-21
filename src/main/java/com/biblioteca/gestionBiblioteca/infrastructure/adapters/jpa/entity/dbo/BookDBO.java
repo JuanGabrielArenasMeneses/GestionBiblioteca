@@ -1,5 +1,6 @@
 package com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +27,11 @@ import lombok.Setter;
 public class BookDBO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BOOK_CODE")
     private Long code;
+    @Column(name = "BOOK_NAME")
     private String name;
+    @Column(name = "BOOK_STATUS")
     private Boolean state;
     public static Book toDomain(BookDBO bookDBO){
         return new Book(

@@ -1,5 +1,8 @@
 package com.biblioteca.gestionBiblioteca.domain.model.book;
 
+import com.biblioteca.gestionBiblioteca.domain.model.book.Code;
+import com.biblioteca.gestionBiblioteca.domain.model.book.Name;
+import com.biblioteca.gestionBiblioteca.domain.model.book.State;
 import lombok.Data;
 
 public class Book {

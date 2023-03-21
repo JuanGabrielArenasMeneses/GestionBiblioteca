@@ -10,10 +10,10 @@ import com.biblioteca.gestionBiblioteca.domain.model.user.User;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IUserRepositoryAdapter;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.UserDBO;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+@Service
 @AllArgsConstructor
 public class UserRepositoryAdapter implements IUserRepository {
     private final IUserRepositoryAdapter iUserRepositoryAdapter;

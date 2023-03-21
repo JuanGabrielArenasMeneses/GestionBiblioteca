@@ -1,12 +1,17 @@
 package com.biblioteca.gestionBiblioteca.domain.model.book.dto;
-
 import com.biblioteca.gestionBiblioteca.domain.model.book.Book;
 import com.biblioteca.gestionBiblioteca.domain.model.book.Code;
 import com.biblioteca.gestionBiblioteca.domain.model.book.Name;
 import com.biblioteca.gestionBiblioteca.domain.model.book.State;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class BookDTO {
     private Long code;
+    @NotNull
+    @NotEmpty(message = "Escriba nombre del libro")
+    @Pattern(regexp = "[\\p{L}\\s]+", message = "Ingrese nombre de libro con caracteres válidos")
     private String name;
     private Boolean state;
 

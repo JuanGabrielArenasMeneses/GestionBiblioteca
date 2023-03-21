@@ -1,5 +1,10 @@
 package com.biblioteca.gestionBiblioteca.domain.model.user;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+
 public class User {
     private final Code code;
     private final Name name;

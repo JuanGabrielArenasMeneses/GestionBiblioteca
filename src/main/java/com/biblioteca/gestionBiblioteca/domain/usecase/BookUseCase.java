@@ -36,6 +36,21 @@ public class BookUseCase {
                 .map(BookDTO::fromDomain)
                 .collect(Collectors.toList());
     }
+    public ArrayList<BookDTO> findAvailableBooks(){
+        List<Book> bookList = this.iBookRepository.findAllBooks();
+        List<Book> availableBooks = bookList.stream()
+                                            .filter(b -> b.getState().getValue() == true)
+                                            .collect(Collectors.toList());
+        return (ArrayList<BookDTO>) availableBooks.stream().map(BookDTO::fromDomain).collect(Collectors.toList());
+    }
+
+    public ArrayList<BookDTO> findBorrowedBooks(){
+        List<Book> bookList = this.iBookRepository.findAllBooks();
+        List<Book> borrowedBooks = bookList.stream()
+                                           .filter(b -> b.getState().getValue() == false)
+                                           .collect(Collectors.toList());
+        return (ArrayList<BookDTO>) borrowedBooks.stream().map(BookDTO::fromDomain).collect(Collectors.toList());
+    }
     public Boolean deleteBook(Long code) {
         return iBookRepository.deleteBook(code);
     }

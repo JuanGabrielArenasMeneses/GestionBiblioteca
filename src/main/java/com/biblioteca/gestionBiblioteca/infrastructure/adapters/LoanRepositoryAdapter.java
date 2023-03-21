@@ -10,10 +10,10 @@ import com.biblioteca.gestionBiblioteca.domain.model.loan.Loan;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.ILoanRepositoryAdapter;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo.LoanDBO;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
+@Service
 @AllArgsConstructor
 public class LoanRepositoryAdapter implements ILoanRepository {
     private final ILoanRepositoryAdapter iLoanRepositoryAdapter;

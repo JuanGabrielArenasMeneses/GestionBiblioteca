@@ -2,6 +2,7 @@ package com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.entity.dbo;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,9 +29,13 @@ import lombok.Setter;
 public class LoanDBO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "LOAN_CODE")
     private Long id;
+    @Column(name = "BOOK_CODE")
     private Long bookCode;
+    @Column(name = "USER_CODE")
     private Long userCode;
+    @Column(name = "LOAN_DATE")
     private LocalDate loanDate;
 
     public LoanDBO(Long bookCode, Long userCode, LocalDate loanDate) {

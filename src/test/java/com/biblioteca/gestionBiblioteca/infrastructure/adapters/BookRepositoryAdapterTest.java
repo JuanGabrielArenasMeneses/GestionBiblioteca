@@ -5,7 +5,6 @@ import com.biblioteca.gestionBiblioteca.domain.model.book.Code;
 import com.biblioteca.gestionBiblioteca.domain.model.book.Name;
 import com.biblioteca.gestionBiblioteca.domain.model.book.State;
 import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IBookRepositoryAdapter;
-import com.biblioteca.gestionBiblioteca.infrastructure.adapters.jpa.IUserRepositoryAdapter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
